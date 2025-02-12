@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-size_12-of-12" style="background-color:white;">
+        <c-case-panel></c-case-panel> 
+        <div class="slds-size_12-of-12 slds-p-around_x-small slds-box slds-m-top_small">
+            <lightning-tabset>
+                <lightning-tab label="Member Information">
+                    <c-member-information></c-member-information>     
+                </lightning-tab>
+                <lightning-tab label="Benefit Information">
+                    
+                </lightning-tab>
+                <lightning-tab label="Agent Resources">
+                    
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+
+        <div class="slds-size_12-of-12 slds-p-around_x-small slds-box slds-m-top_small">
+            <lightning-tabset>
+                <lightning-tab label="Order History">
+                    <c-order-history></c-order-history>    
+                </lightning-tab>
+                <lightning-tab label="Claim History">
+                    
+                </lightning-tab>
+                <lightning-tab label="Comment History">
+                    
+                </lightning-tab>
+            </lightning-tabset>
+        </div>
+    </div>
+</template>

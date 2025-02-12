@@ -1,0 +1,62 @@
+<template>
+    <lightning-card title="Case">
+        <lightning-button slot="actions" title="Create Order" label="Create Order"></lightning-button>
+        <lightning-button slot="actions" title="Create Claim" label="Create Claim" class="slds-m-left_x-small"></lightning-button>
+        <lightning-button slot="actions" title="Create Comment" label="Create Comment" class="slds-m-left_x-small"></lightning-button>
+        <lightning-button slot="actions" title="Update Case" label="Update Case" class="slds-m-left_x-small"></lightning-button>
+        
+        <hr style="margin:0;"/>
+
+        <div class="slds-grid slds-wrap slds-size_12-of-12 slds-p-around_small">
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Full Name
+                </label>
+                <div>
+                    <lightning-formatted-text value="David Jones"></lightning-formatted-text>
+                </div>
+            </div>
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Case Reason
+                </label>
+                <div>
+                    <lightning-formatted-text value="Website"></lightning-formatted-text>
+                </div>
+            </div>
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Case Sub Reason
+                </label>
+                <div>
+                    <lightning-formatted-text value="Search Issue"></lightning-formatted-text>
+                </div>
+            </div>
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Case Duration
+                </label>
+                <div>
+                    <lightning-formatted-text value="0"></lightning-formatted-text>
+                </div>
+            </div>
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Status
+                </label>
+                <div>
+                    <lightning-formatted-text value="Closed"></lightning-formatted-text>
+                </div>
+            </div>
+            <div class="slds-size_1-of-6 slds-form-element">
+                <label class="slds-form-element__label">
+                    Cases in the last 30 days
+                </label>
+                <div>
+                    <lightning-formatted-text value="2"></lightning-formatted-text>
+                </div>
+            </div>
+        </div>
+    
+    </lightning-card>    
+</template>
