@@ -1,0 +1,40 @@
+<template>
+    <div class="slds-size_12-of-12 slds-grid slds-wrap" style="background:white;">
+        <div class="slds-p-around_small slds-size_12-of-12">
+            <lightning-card title="Plans">
+                <lightning-combobox class="slds-p-around_small" label="Select List" variant="label-hidden" placeholder="Select Plan"
+                options={options} onchange={handlePlanChange}></lightning-combobox>
+            </lightning-card>                
+        </div>
+        <div lwc:if={showData} class="slds-size_12-of-12 slds-p-around_small table-panel">
+            <lightning-card title="Member Follow up">
+                <div class="slds-size_12-of-12 slds-grid slds-wrap slds-p-around_x-small">
+                    <div class="slds-size_4-of-12">
+                        <lightning-input class="search-input" variant="label-hidden" label="Search" type="search"
+                            placeholder="Search" onchange={handleSearch}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-size_4-of-12 slds-grid slds-grid slds-align_absolute-center">
+                        <lightning-input type="toggle" label="Tier 1" name="tier1" onchange={handleTierChange} class="tier-input" checked message-toggle-active="" message-toggle-inactive=""></lightning-input>
+                        <lightning-input type="toggle" label="Tier 2" name="tier2" onchange={handleTierChange} class="tier-input slds-p-left_small" checked message-toggle-active="" message-toggle-inactive=""></lightning-input>
+                    </div>
+                    <div class="slds-size_4-of-12">
+    
+                    </div>
+                </div>
+                <div style="height:40vh; overflow:auto;">
+                    <lightning-datatable
+                        key-field="Id"
+                        columns={columns}
+                        data={data}
+                        hide-checkbox-column
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirection}
+                        sorted-by={sortedBy}
+                        onsort={onHandleSort}>
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>
