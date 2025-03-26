@@ -1,0 +1,245 @@
+<template>
+	<div class="slds-size_12-of-12 slds-grid slds-p-around_large" style="background:white;">
+		<div class="slds-size_8-of-12">
+			<div class="slds-size_12-of-12 slds-box slds-box_xx-small">
+                <div class="slds-size_12-of-12" style="background:#7bd1f4; height:60px">
+                </div>
+                <div class="slds-size_12-of-12">
+                    <div class="slds-size_12-of-12 slds-grid">
+                        <div class="slds-size_1-of-12">
+                        </div>
+                        <div class="slds-size_11-of-12 slds-p-around_small slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12 slds-text-heading_medium">
+                                <b>Simply Health Care</b>
+                            </div>
+                            <div class="slds-size_12-of-12 slds-grid slds-m-top_medium" style="align-items: baseline;">
+                                <div class="slds-size_5-of-12 slds-grid slds-wrap">
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            Phone
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value="(318) 678-8411"></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            Email
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value="SimplyMedicare@gmail.com"></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            DOB
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value="2016/03/05"></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            Current Member
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value=""></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            House Hold
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value=""></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            Address
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value=""></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-grid slds-p-around_x-small">
+                                        <div class="slds-size_6-of-12">
+                                            <label class="label_element font_bold">
+                                            Caller
+                                            </label>            
+                                        </div>
+                                        <div class="slds-size_6-of-12">
+                                            <lightning-formatted-text value="Mother"></lightning-formatted-text>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-size_2-of-12"></div>
+                                <div class="slds-size_5-of-12 slds-grid slds-wrap">
+                                    <div class="slds-size_12-of-12">
+                                        <label class="label_element font_bold">
+                                        Shipping Address
+                                        </label>            
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-text-heading_x-small slds-m-top_small">
+                                        <fieldset class="slds-form-element" role="radiogroup">
+                                            <div class="slds-form-element__control">
+                                                <span class="slds-radio">
+                                                <input type="radio" id="radio-59" value="radio-59" name="default" checked />
+                                                <label class="slds-radio__label" for="radio-59">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label">
+                                                <b>Simply Health Care, 500089 </b>
+                                                (Home)
+                                                <br/>Lorem ipsum is a dummy or placeholder text commonly...
+                                                </span>
+                                                </label>
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-m-top_medium">
+                                        <a class="channge-address-link" onclick={handleAddressChange}>Change Address</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+            <div class="slds-size_12-of-12 slds-m-top_small">
+                <lightning-card title="Shop By Category's">
+                    <lightning-accordion active-section-name="1">
+                        <template for:each={categories} for:item="c">
+                            <lightning-accordion-section key={c.value} name={c.value} label={c.label}>
+                                
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="#">#</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="Product & image">Product & image</div>
+                                            </th>
+                                            <th class="table-header" scope="col" style="width:14%;">
+                                                <div class="slds-truncate" title="Quantity">Quantity</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="UPC">UPC</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="SKU">SKU</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="Unit">Unit</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="Compare">Compare</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="Price">Price</div>
+                                            </th>
+                                            <th class="table-header" scope="col">
+                                                <div class="slds-truncate" title="Catalog SKU">Catalog SKU</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={tableData} for:item="td">
+                                            <tr class="slds-hint-parent" key={td.Id}>
+                                                <td data-label="#">
+                                                    <div class="slds-truncate" title={td.Id}>{td.Id}</div>
+                                                </td>
+                                                <td data-label="Product & image">
+                                                    <div class="slds-truncate" title={td.Product}>{td.Product}</div>
+                                                </td>
+                                                <td data-label="Quantity" style="width:14%;">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <button class="slds-button slds-button_icon slds-button_icon-small slds-input__button_decrement" title="Decrement counter">
+                                                                <lightning-icon icon-name="utility:ban" alternative-text="Decrement counter" size="xx-small" title="Decrement counter"></lightning-icon>
+                                                            </button>
+                                                            <input type="number" id={td.Id} value={td.Quantity} class="slds-input slds-input_counter" />
+                                                            <button class="slds-button slds-button_icon slds-button_icon-small slds-input__button_increment" title="Increment counter">
+                                                                <lightning-icon icon-name="utility:new" alternative-text="Increment counter" size="xx-small" title="Increment counter"></lightning-icon>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td data-label="UPC">
+                                                    <div class="slds-truncate" title={td.UPC}>{td.UPC}</div>
+                                                </td>
+                                                <td data-label="SKU">
+                                                    <div class="slds-truncate" title={td.SKU}>{td.SKU}</div>
+                                                </td>
+                                                <td data-label="Unit">
+                                                    <div class="slds-truncate" title={td.Unit}>{td.Unit}</div>
+                                                </td>
+                                                <td data-label="Compare">
+                                                    <div class="slds-truncate" title={td.Compare}>{td.Compare}</div>
+                                                </td>
+                                                <td data-label="Price">
+                                                    <div class="slds-truncate" title={td.Price}>{td.Price}</div>
+                                                </td>
+                                                <td data-label="Catalog SKU">
+                                                    <div class="slds-truncate" title={td.CatalogSKU}>{td.CatalogSKU}</div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion>
+                </lightning-card>
+            </div>
+		</div>
+		<div class="slds-size_4-of-12 slds-p-left_small">
+            <lightning-card title="Cart">
+                <div class="slds-size_12-of-12 slds-grid slds-wrap slds-p-around_x-small">
+                    <template for:each={cartItems} for:item="i">
+                        <div class="slds-size_12-of-12 slds-grid slds-m-bottom_x-small" style="align-items: anchor-center;" key={i.id}>
+                            <div class="slds-size_1-of-12">
+                                <lightning-icon icon-name="standard:product" alternative-text="Increment counter" size="medium" title="Increment counter"></lightning-icon>
+                            </div>
+                            <div class="slds-size_7-of-12">
+                                {i.label}
+                                <br/>
+                                <b>${i.amount}</b>
+                            </div>
+                            <div class="slds-size_3-of-12">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <button class="slds-button slds-button_icon slds-button_icon-small slds-input__button_decrement" title="Decrement counter">
+                                            <lightning-icon icon-name="utility:ban" alternative-text="Decrement counter" size="xx-small" title="Decrement counter"></lightning-icon>
+                                        </button>
+                                        <input type="number" id={i.id} placeholder="1" class="slds-input slds-input_counter" />
+                                        <button class="slds-button slds-button_icon slds-button_icon-small slds-input__button_increment" title="Increment counter">
+                                            <lightning-icon icon-name="utility:new" alternative-text="Increment counter" size="xx-small" title="Increment counter"></lightning-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_1-of-12">
+                                <lightning-button-icon icon-name="utility:delete" size="medium" alternative-text="Remove" class="slds-m-left_xx-small"></lightning-button-icon>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+		</div>
+	</div>
+</template>
