@@ -1,0 +1,441 @@
+<template>
+
+    <div class="slds-size_12-of-12 slds-box slds-grid slds-wrap section-bg">
+        <template for:each={benefitOptions} for:item="b">
+            <div class="slds-size_3-of-12" key={b.value}>
+                <lightning-input type="radio" label={b.label} name="benefits" onchange={handleRadioChange} checked={b.checked}></lightning-input>
+            </div>        
+        </template>
+    </div>
+
+    <div class="slds-section slds-is-open slds-m-bottom_medium member-section">
+        <h3 class="slds-section__title section-bg">
+        <button aria-controls="expando-member-id" onclick={toggleMemberSection} aria-expanded="true" class="slds-button slds-section__title-action section-bg">
+        <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+        </svg>
+        <span class="slds-truncate" title="Member Information">Member Information</span>
+        </button>
+        </h3>
+        <div class="slds-section__content" id="expando-member-id">
+            <div class="slds-grid slds-wrap slds-size_12-of-12 slds-p-around_small">
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Name
+                    </label>
+                    <div>
+                        <lightning-formatted-text lwc:if={memberInformation.firstName} value={memberInformation.firstName}></lightning-formatted-text> &nbsp;
+                        <lightning-formatted-text lwc:if={memberInformation.lastName} value={memberInformation.lastName}></lightning-formatted-text> &nbsp;
+                        <lightning-formatted-text lwc:if={memberInformation.middleNameInitial} value={memberInformation.middleNameInitial}></lightning-formatted-text> &nbsp;
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Address
+                    </label>
+                    <div>
+                        <lightning-formatted-text lwc:if={memberInformation.address_1} value={memberInformation.address_1}></lightning-formatted-text> &nbsp;
+                        <lightning-formatted-text lwc:if={memberInformation.address_2} value={memberInformation.address_2}></lightning-formatted-text> &nbsp; 
+                        <lightning-formatted-text lwc:if={memberInformation.city} value={memberInformation.city}></lightning-formatted-text> &nbsp;
+                        <lightning-formatted-text lwc:if={memberInformation.stateCode} value={memberInformation.stateCode}></lightning-formatted-text> &nbsp;
+                        <lightning-formatted-text lwc:if={memberInformation.zipcode} value={memberInformation.zipcode}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Member Id Name
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.MemeberId}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Phone Number
+                    </label>
+                    <div>
+                        <lightning-formatted-phone value={memberInformation.phoneNumber}></lightning-formatted-phone>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Card Member Id
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.cardMemberId}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Registered Email
+                    </label>
+                    <div>
+                        <lightning-formatted-email value={memberInformation.email}></lightning-formatted-email>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element">
+                    <label class="slds-form-element__label">
+                        Household Id
+                    </label>
+                    <div>
+                        <a onclick={showHouseHoldTable}>{memberInformation.householdInd}</a>
+                        <!--<lightning-formatted-text value="Test" onclick={showHouseHoldTable}></lightning-formatted-text>-->
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element">
+                    <label class="slds-form-element__label">
+                        Optional Email
+                    </label>
+                    <div>
+                        <lightning-formatted-email value={memberInformation.optionalEmail}></lightning-formatted-email>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-1 slds-form-element household-table-section slds-hide">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Household ID">Household ID</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Member ID">Member ID</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Benefit ID">Benefit ID</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="First Name">First Name</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Last Name">Last Name</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Enroll Date">Enroll Date</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Disenroll Date">Disenroll Date</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Status">Status</div>
+                                </th>
+                                <th class="table-header" scope="col" tabindex="0">
+                                    <div class="slds-truncate" title="Status Reason">Status Reason</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="slds-hint-parent">
+                                <th data-label="Household ID" scope="row" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.householdInd}>{memberInformation.householdInd}</div>
+                                </th>
+                                <td data-label="Member ID" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.MemeberId}>{memberInformation.MemeberId}</div>
+                                </td>
+                                <td data-label="Benefit ID" tabindex="0">
+                                    <div class="slds-truncate" title={benefitInformation.benefitId}>{benefitInformation.benefitId}</div>
+                                </td>
+                                <td data-label="First Name" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.firstName}>{memberInformation.firstName}</div>
+                                </td>
+                                <td data-label="Last Name" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.lastName}>{memberInformation.lastName}</div>
+                                </td>
+                                <td data-label="Enroll Date" tabindex="0">
+                                    <div class="slds-truncate" title={benefitInformation.enrollDate}>{benefitInformation.enrollDate}</div>
+                                </td>
+                                <td data-label="Disenroll Date" tabindex="0">
+                                    <div class="slds-truncate" title={benefitInformation.disenrollDate}>{benefitInformation.disenrollDate}</div>
+                                </td>
+                                <td data-label="Status" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.status}>{memberInformation.status}</div>
+                                </td>
+                                <td data-label="Status Reason" tabindex="0">
+                                    <div class="slds-truncate" title={memberInformation.statusReason}>{memberInformation.statusReason}</div>
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-top_small slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        DOB
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.dob}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-top_small slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Cell Phone #
+                    </label>
+                    <div>
+                        <lightning-formatted-phone value={memberInformation.cellPhone}></lightning-formatted-phone>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    
+                    <section aria-label="Dialog title" aria-describedby="popover-body-id" class="slds-popover slds-nubbin_left-top slds-hide status-popover" role="dialog">
+                        <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-float_right slds-popover__close" title="Close dialog">
+                        <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close dialog</span>
+                        </button>
+                        <div id="popover-body-id" class="slds-popover__body">
+                        <header class="slds-popover__header">
+                          <h2 class="slds-text-heading_small" id="dialog-heading-id-115">Enrollment Status</h2>
+                        </header><br/>
+                        <p>Enrolled Date: &nbsp; &nbsp;&nbsp;  {benefitInformation.enrollDate}</p>
+                        <p>Disenroll Date: &nbsp; &nbsp;&nbsp; {benefitInformation.disenrollDate}</p>
+                        </div>
+                    </section>
+
+
+                    <label class="slds-form-element__label">
+                        Status/Status Reason
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.status} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text> /
+                        <lightning-formatted-text value={memberInformation.statusReason} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        DC
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.dcId}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Address Change Indicator
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.opAddrChngInd}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Special Instruction
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.specialHandlingDsc}></lightning-formatted-text>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <div class="slds-section slds-is-open slds-m-bottom_medium benefit-section">
+        <h3 class="slds-section__title section-bg">
+        <button aria-controls="expando-benefit-id" onclick={toggleBenefitSection} aria-expanded="true" class="slds-button slds-section__title-action section-bg">
+        <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+        </svg>
+        <span class="slds-truncate" title="Benefit Information">Benefit Information</span>
+        </button>
+        </h3>
+        <div class="slds-section__content" id="expando-benefit-id">
+            <div class="slds-grid slds-wrap slds-size_12-of-12 slds-p-around_small">
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Form Description
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.catalogDescription}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Pay Over Benefit Online
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.ncpdpInd}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Benefit Description	
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.benefitDescription}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Benefit Details
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.benefitPlan}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Amount
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.benefitAmount}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Items Catalog Description
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.catalogDescription}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Rollover Amount
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.rolloverAmt}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Segment Catalog
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.segment}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Rollover Indicator
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.rolloverInd}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        URL
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.url}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Benefit Amount Available
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.benefitAmount}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Used/Max Order
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.totalOrders}></lightning-formatted-text>/
+                        <lightning-formatted-text value={benefitInformation.maxOrders}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Period Factor
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.periodFactor}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Flexcard Purse Opt-in
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.purseOptInInd}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Store List
+                    </label>
+                    <div>
+                        <lightning-formatted-text value=""></lightning-formatted-text>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+
+    <div class="slds-section slds-is-open slds-m-bottom_medium agent-section">
+        <h3 class="slds-section__title section-bg">
+        <button aria-controls="expando-agent-id" onclick={toggleAgentSection} aria-expanded="true" class="slds-button slds-section__title-action section-bg">
+        <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+        <use xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch"></use>
+        </svg>
+        <span class="slds-truncate" title="Agent Resources">Agent Resources</span>
+        </button>
+        </h3>
+        <div class="slds-section__content" id="expando-agent-id">
+            <div class="slds-grid slds-wrap slds-size_12-of-12 slds-p-around_small">
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Additional Benefits
+                    </label>
+                    <div>
+                        <lightning-formatted-text value=""></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Member Service Phone
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.memberServicePhone}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        OTCHS Dedicated Phone
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.otchsDedicatedPhone}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Agent FAQs
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.faqPdf}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Item Catalog PDF
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.catalogPdf}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-1 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Plan Message
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={memberInformation.planMessage}></lightning-formatted-text>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-1 slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label">
+                        Agent Message
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.agentMessage}></lightning-formatted-text>
+                    </div>
+                </div>                
+            </div>    
+        </div>
+    </div>
+    
+</template>
