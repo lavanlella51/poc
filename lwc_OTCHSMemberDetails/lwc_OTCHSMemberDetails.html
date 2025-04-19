@@ -34,11 +34,7 @@
                         Address
                     </label>
                     <div>
-                        <lightning-formatted-text lwc:if={memberInformation.address_1} value={memberInformation.address_1}></lightning-formatted-text> &nbsp;
-                        <lightning-formatted-text lwc:if={memberInformation.address_2} value={memberInformation.address_2}></lightning-formatted-text> &nbsp; 
-                        <lightning-formatted-text lwc:if={memberInformation.city} value={memberInformation.city}></lightning-formatted-text> &nbsp;
-                        <lightning-formatted-text lwc:if={memberInformation.stateCode} value={memberInformation.stateCode}></lightning-formatted-text> &nbsp;
-                        <lightning-formatted-text lwc:if={memberInformation.zipcode} value={memberInformation.zipcode}></lightning-formatted-text>
+                        <lightning-formatted-text value={memberInformation.memAddress}></lightning-formatted-text> &nbsp;                        
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -62,7 +58,7 @@
                         Card Member Id
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.cardMemberId}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.cardMemberId}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -70,7 +66,7 @@
                         Registered Email
                     </label>
                     <div>
-                        <lightning-formatted-email value={memberInformation.email}></lightning-formatted-email>
+                        <lightning-formatted-email value={memberInformation.emailAddress}></lightning-formatted-email>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element">
@@ -78,8 +74,7 @@
                         Household Id
                     </label>
                     <div>
-                        <a onclick={showHouseHoldTable}>{memberInformation.householdInd}</a>
-                        <!--<lightning-formatted-text value="Test" onclick={showHouseHoldTable}></lightning-formatted-text>-->
+                        <a onclick={showHouseHoldTable}>{benefitInformation.householdInd}</a>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element">
@@ -126,13 +121,13 @@
                         <tbody>
                             <tr class="slds-hint-parent">
                                 <th data-label="Household ID" scope="row" tabindex="0">
-                                    <div class="slds-truncate" title={memberInformation.householdInd}>{memberInformation.householdInd}</div>
+                                    <div class="slds-truncate" title={benefitInformation.householdInd}>{benefitInformation.householdInd}</div>
                                 </th>
                                 <td data-label="Member ID" tabindex="0">
                                     <div class="slds-truncate" title={memberInformation.MemeberId}>{memberInformation.MemeberId}</div>
                                 </td>
                                 <td data-label="Benefit ID" tabindex="0">
-                                    <div class="slds-truncate" title={benefitInformation.benefitId}>{benefitInformation.benefitId}</div>
+                                    <div class="slds-truncate" title={benefitInformation.id}>{benefitInformation.id}</div>
                                 </td>
                                 <td data-label="First Name" tabindex="0">
                                     <div class="slds-truncate" title={memberInformation.firstName}>{memberInformation.firstName}</div>
@@ -141,16 +136,16 @@
                                     <div class="slds-truncate" title={memberInformation.lastName}>{memberInformation.lastName}</div>
                                 </td>
                                 <td data-label="Enroll Date" tabindex="0">
-                                    <div class="slds-truncate" title={benefitInformation.enrollDate}>{benefitInformation.enrollDate}</div>
+                                    <div class="slds-truncate" title={benefitInformation.otchsMemberStatus.enrollDate}>{benefitInformation.otchsMemberStatus.enrollDate}</div>
                                 </td>
                                 <td data-label="Disenroll Date" tabindex="0">
-                                    <div class="slds-truncate" title={benefitInformation.disenrollDate}>{benefitInformation.disenrollDate}</div>
+                                    <div class="slds-truncate" title={benefitInformation.otchsMemberStatus.disenrollDate}>{benefitInformation.otchsMemberStatus.disenrollDate}</div>
                                 </td>
                                 <td data-label="Status" tabindex="0">
-                                    <div class="slds-truncate" title={memberInformation.status}>{memberInformation.status}</div>
+                                    <div class="slds-truncate" title={benefitInformation.otchsMemberStatus.status}>{benefitInformation.otchsMemberStatus.status}</div>
                                 </td>
                                 <td data-label="Status Reason" tabindex="0">
-                                    <div class="slds-truncate" title={memberInformation.statusReason}>{memberInformation.statusReason}</div>
+                                    <div class="slds-truncate" title={benefitInformation.otchsMemberStatus.statusReason}>{benefitInformation.otchsMemberStatus.statusReason}</div>
                                 </td>
                             </tr>                            
                         </tbody>
@@ -161,7 +156,7 @@
                         DOB
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.dob}></lightning-formatted-text>
+                        <lightning-formatted-text value={memberInformation.dateOfBirth}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-top_small slds-m-bottom_small">
@@ -185,18 +180,18 @@
                         <header class="slds-popover__header">
                           <h2 class="slds-text-heading_small" id="dialog-heading-id-115">Enrollment Status</h2>
                         </header><br/>
-                        <p>Enrolled Date: &nbsp; &nbsp;&nbsp;  {benefitInformation.enrollDate}</p>
-                        <p>Disenroll Date: &nbsp; &nbsp;&nbsp; {benefitInformation.disenrollDate}</p>
+                        <p>Enrolled Date: &nbsp; &nbsp;&nbsp;  {benefitInformation.otchsMemberStatus.enrollDate}</p>
+                        <p>Disenroll Date: &nbsp; &nbsp;&nbsp; {benefitInformation.otchsMemberStatus.disenrollDate}</p>
                         </div>
                     </section>
-
 
                     <label class="slds-form-element__label">
                         Status/Status Reason
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.status} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text> /
-                        <lightning-formatted-text value={memberInformation.statusReason} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.otchsMemberStatus.status} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text>
+                        <lightning-formatted-text lwc:if={benefitInformation.otchsMemberStatus.statusReason} value=" / " onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text>
+                        <lightning-formatted-text lwc:if={benefitInformation.otchsMemberStatus.statusReason} value={benefitInformation.otchsMemberStatus.statusReason} onmouseover={showStatusPopover} onmouseout={hideStatusPopover}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -212,7 +207,7 @@
                         Address Change Indicator
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.opAddrChngInd}></lightning-formatted-text>
+                        <lightning-formatted-text value={memberInformation.addressChangeIndicator}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -220,7 +215,7 @@
                         Special Instruction
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.specialHandlingDsc}></lightning-formatted-text>
+                        <lightning-formatted-text value={memberInformation.specialInstruction}></lightning-formatted-text>
                     </div>
                 </div>
             </div>    
@@ -243,7 +238,7 @@
                         Form Description
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.catalogDescription}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.description}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -255,19 +250,41 @@
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
+                    <section aria-label="Dialog title" aria-describedby="benefit-popover-body-id" class="slds-popover slds-nubbin_left-top slds-hide benefit-popover" role="dialog">
+                        <button class="slds-button slds-button_icon slds-button_icon slds-button_icon-small slds-float_right slds-popover__close" title="Close dialog">
+                        <svg class="slds-button__icon" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close dialog</span>
+                        </button>
+                        <div id="benefit-popover-body-id" class="slds-popover__body">
+                        <header class="slds-popover__header">
+                          <h2 class="slds-text-heading_small" id="dialog-heading-id-116">Benefit Details</h2>
+                        </header><br/>
+                        <p>Premium Pkg: &nbsp; &nbsp;&nbsp;  {benefitInformation.premiumPackageCd}</p>
+                        <p>Benefit Plan: &nbsp; &nbsp;&nbsp; {benefitInformation.benefitPlan}</p>
+                        <p>Benefit Id: &nbsp; &nbsp;&nbsp;  {benefitInformation.id}</p>
+                        <p>Invoice LOB: &nbsp; &nbsp;&nbsp;  {benefitInformation.invoiceLob}</p>
+                        <p>Subgroup: &nbsp; &nbsp;&nbsp;  {benefitInformation.subgroup}</p>                        
+                        <p>Household Indicator: &nbsp; &nbsp;&nbsp;  {benefitInformation.householdInd}</p>
+                        <p>Payment Type: &nbsp; &nbsp;&nbsp;  {benefitInformation.paymentType}</p>                        
+                        <p>Last Benefit Update: &nbsp; &nbsp;&nbsp;  {benefitInformation.benefitUpdateDate}</p>
+                        </div>
+                    </section>
+                    
+                    <label class="slds-form-element__label">
+                        Benefit Details
+                    </label>
+                    <div>
+                        <lightning-formatted-text value={benefitInformation.benefitPlan} onmouseover={showBenefitPopover} onmouseout={hideBenefitPopover}></lightning-formatted-text>
+                    </div>
+                </div>                
+                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
                     <label class="slds-form-element__label">
                         Benefit Description	
                     </label>
                     <div>
                         <lightning-formatted-text value={benefitInformation.benefitDescription}></lightning-formatted-text>
-                    </div>
-                </div>
-                <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
-                    <label class="slds-form-element__label">
-                        Benefit Details
-                    </label>
-                    <div>
-                        <lightning-formatted-text value={benefitInformation.benefitPlan}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -283,7 +300,7 @@
                         Items Catalog Description
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.catalogDescription}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.description}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -291,7 +308,7 @@
                         Rollover Amount
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.rolloverAmt}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.rollOverAmt}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -307,7 +324,7 @@
                         Rollover Indicator
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.rolloverInd}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.rollOverIndicator}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -315,7 +332,7 @@
                         URL
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.url}></lightning-formatted-text>
+                        <lightning-formatted-url value={benefitInformation.benefitUrl}></lightning-formatted-url>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -323,7 +340,7 @@
                         Benefit Amount Available
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.benefitAmount}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.balanceAmount}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -331,7 +348,7 @@
                         Used/Max Order
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.totalOrders}></lightning-formatted-text>/
+                        <lightning-formatted-text value={benefitInformation.orderCount}></lightning-formatted-text>/
                         <lightning-formatted-text value={benefitInformation.maxOrders}></lightning-formatted-text>
                     </div>
                 </div>
@@ -348,7 +365,7 @@
                         Flexcard Purse Opt-in
                     </label>
                     <div>
-                        <lightning-formatted-text value={benefitInformation.purseOptInInd}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.flexCardOptinIndicator}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-2 slds-form-element slds-m-bottom_small">
@@ -415,7 +432,7 @@
                         Item Catalog PDF
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.catalogPdf}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.catalogPdf}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-1 slds-form-element slds-m-bottom_small">
@@ -423,7 +440,7 @@
                         Plan Message
                     </label>
                     <div>
-                        <lightning-formatted-text value={memberInformation.planMessage}></lightning-formatted-text>
+                        <lightning-formatted-text value={benefitInformation.planMessage}></lightning-formatted-text>
                     </div>
                 </div>
                 <div class="slds-size_1-of-1 slds-form-element slds-m-bottom_small">
