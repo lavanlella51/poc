@@ -120,9 +120,12 @@
             </div>         
             <div class="slds-size_12-of-12 slds-m-top_small">
                 <lightning-card title="Shop By Category's">
+                    <lightning-input class="search-input" variant="label-hidden" label="Search" type="search"
+                            placeholder="Search" onchange={handleSearch} slot="actions">
+                    </lightning-input>
                     <lightning-accordion active-section-name="1">
-                        <template for:each={categories} for:item="c">
-                            <lightning-accordion-section key={c.value} name={c.value} label={c.label}>
+                        <template for:each={catalogItems} for:item="c">
+                            <lightning-accordion-section key={c.description} name={c.description} label={c.description}>
                                 
                                 <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label">
                                     <thead>
@@ -133,7 +136,7 @@
                                             <th class="table-header" scope="col">
                                                 <div class="slds-truncate" title="Product & image">Product & image</div>
                                             </th>
-                                            <th class="table-header" scope="col" style="width:14%;">
+                                            <th class="table-header" scope="col" style="width:12%;">
                                                 <div class="slds-truncate" title="Quantity">Quantity</div>
                                             </th>
                                             <th class="table-header" scope="col">
@@ -157,16 +160,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template for:each={tableData} for:item="td">
-                                            <tr class="slds-hint-parent" key={td.Id}>
+                                        <template for:each={c.tableData} for:item="td">
+                                            <tr class="slds-hint-parent" key={td.skuId}>
                                                 <td data-label="#">
-                                                    <div class="slds-truncate" title={td.Id}>{td.Id}</div>
+                                                    <div class="slds-truncate" title={td.serialNumber}>{td.serialNumber}</div>
                                                 </td>
                                                 <td data-label="Product & image">
-                                                    <div class="slds-truncate" title={td.Product}>{td.Product}</div>
+                                                    <div class="slds-grid" style="align-items: center;">
+                                                        <div lwc:if={td.imageUrl}>
+                                                            <img src="https://www.w3schools.com/html/img_girl.jpg" width="30" height="30">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="slds-truncate" title={td.description}>
+                                                            {td.description}
+                                                        </div>
+                                                    </div>
+                                                    <div lwc:if={td.isOutOfStock} class="slds-grid" style="color:red">
+                                                        Out of stock
+                                                    </div>
                                                 </td>
-                                                <td data-label="Quantity" style="width:14%;">
-                                                    <div class="slds-form-element">
+                                                <td data-label="Quantity" style="width:12%;">
+                                                    <lightning-input type="number" disabled={td.disaleInput} id={td.Id} variant="label-hidden" 
+                                                        placeholder="Type here..." max={td.maxQuantity} message-when-range-overflow="Quantity not available">
+                                                    </lightning-input>
+                                                    <!--<div class="slds-form-element">
                                                         <div class="slds-form-element__control">
                                                             <button class="slds-button slds-button_icon slds-button_icon-small slds-input__button_decrement" title="Decrement counter">
                                                                 <lightning-icon icon-name="utility:ban" alternative-text="Decrement counter" size="xx-small" title="Decrement counter"></lightning-icon>
@@ -176,25 +193,25 @@
                                                                 <lightning-icon icon-name="utility:new" alternative-text="Increment counter" size="xx-small" title="Increment counter"></lightning-icon>
                                                             </button>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                 </td>
                                                 <td data-label="UPC">
-                                                    <div class="slds-truncate" title={td.UPC}>{td.UPC}</div>
+                                                    <div class="slds-truncate" title={td.benefitUpc}>{td.benefitUpc}</div>
                                                 </td>
                                                 <td data-label="SKU">
-                                                    <div class="slds-truncate" title={td.SKU}>{td.SKU}</div>
+                                                    <div class="slds-truncate" title={td.skuId}>{td.skuId}</div>
                                                 </td>
                                                 <td data-label="Unit">
-                                                    <div class="slds-truncate" title={td.Unit}>{td.Unit}</div>
+                                                    <div class="slds-truncate" title={td.unit}>{td.unit}</div>
                                                 </td>
                                                 <td data-label="Compare">
-                                                    <div class="slds-truncate" title={td.Compare}>{td.Compare}</div>
+                                                    <div class="slds-truncate" title={td.compBrand}>{td.compBrand}</div>
                                                 </td>
                                                 <td data-label="Price">
-                                                    <div class="slds-truncate" title={td.Price}>{td.Price}</div>
+                                                    <div class="slds-truncate" title={td.price}>{td.price}</div>
                                                 </td>
                                                 <td data-label="Catalog SKU">
-                                                    <div class="slds-truncate" title={td.CatalogSKU}>{td.CatalogSKU}</div>
+                                                    <div class="slds-truncate" title={td.catalogSkuId}>{td.catalogSkuId}</div>
                                                 </td>
                                             </tr>
                                         </template>
